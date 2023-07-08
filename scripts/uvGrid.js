@@ -23,17 +23,42 @@ class CubeManager {
       case CubeManager.uvTypes.box:
         const s = this._raw.size;
         const [x, y] = this._raw.uv;
-        return {
-          north: { uv: [x + s[2], y + s[2]], uv_size: [s[0], s[1]] },
-          east: { uv: [x, y + s[2]], uv_size: [s[2], s[1]] },
-          south: { uv: [x + s[2] * 2 + s[0], y + s[2]], uv_size: [s[0], s[1]] },
-          west: { uv: [x + s[2] + s[0], y + s[2]], uv_size: [s[2], s[1]] },
-          up: { uv: [x + s[2], y], uv_size: [s[0], s[2]] },
+        const retval = {
+          north: {
+            uv: [x + s[2], y + s[2]],
+            uv_size: [s[0], s[1]],
+          },
+          east: {
+            uv: [x, y + s[2]],
+            uv_size: [s[2], s[1]],
+          },
+          south: {
+            uv: [x + s[2] * 2 + s[0], y + s[2]],
+            uv_size: [s[0], s[1]],
+          },
+          west: {
+            uv: [x + s[2] + s[0], y + s[2]],
+            uv_size: [s[2], s[1]],
+          },
+          up: {
+            uv: [x + s[2], y],
+            uv_size: [s[0], s[2]],
+          },
           down: {
-            uv: [x + s[2] + s[0], y - Math.min(0, s[2])],
-            uv_size: [s[0], Math.abs(s[2])],
+            uv: [x + s[2] + s[0], y],
+            uv_size: [s[0], s[2]],
           },
         };
+        for (let sideName of Object.keys(retval)) {
+          const side = retval[sideName];
+          for (let i in side.uv_size) {
+            if (side.uv_size[i] < 0) {
+              side.uv[i] -= side.uv_size[0];
+              side.uv_size[i] *= -1;
+            }
+          }
+        }
+        return retval;
       default:
         return null;
     }

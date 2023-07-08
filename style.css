@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+}
+
+button {
+  border-width: 3px;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+button[disabled] {
+  cursor: initial;
+}
+
+textarea {
+  resize: none;
+}
+
+img, canvas {
+  image-rendering: pixelated;
+}
+
+* {
+  box-sizing: border-box !important;
+}
+
+#imageInputDisplay, #imageOutputDisplay {
+  align-self: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.col > * {
+  height: 100%;
+}
+
+.grow {
+  flex-grow: 1;
+  min-height: 0;
+  min-width: 0;
+  flex-basis: 0;
+}

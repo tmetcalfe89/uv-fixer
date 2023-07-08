@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UV Mapper</title>
+    <script src="script.js" type="module"></script>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row grow">
+        <div class="col grow">
+          <button data-clicky="#jsonInput" id="jsonInputButton">
+            Click me to upload JSON
+          </button>
+          <textarea class="hidden" readonly id="jsonInputDisplay"></textarea>
+        </div>
+        <div class="col grow">
+          <button data-clicky="#imageInput" id="imageInputButton">
+            Click me to upload texture
+          </button>
+          <img id="imageInputDisplay" class="hidden" />
+        </div>
+      </div>
+      <div class="row">
+        <button disabled class="grow" id="processButton">Process</button>
+        <button disabled class="grow" id="restartButton">Restart</button>
+      </div>
+      <div class="row grow">
+        <div class="col grow">
+          <textarea readonly id="jsonOutputDisplay"></textarea>
+        </div>
+        <div class="col grow">
+          <canvas id="imageOutputDisplay" height="2" width="2"></canvas>
+        </div>
+      </div>
+      <button disabled>Download</button>
+    </div>
+
+    <input
+      type="file"
+      id="imageInput"
+      class="hidden"
+      accept="image/png, image/jpeg"
+    />
+    <input
+      type="file"
+      id="jsonInput"
+      class="hidden"
+      accept="application/json"
+    />
+  </body>
+</html>

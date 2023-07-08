@@ -164,10 +164,10 @@ actions.process.addEventListener("click", () => {
 
     for (let side in initialCube) {
       const props = [
-        ...initialCube[side].uv.map((e) => Math.abs(e)),
-        ...initialCube[side].uv_size.map((e) => Math.abs(e)),
-        ...finalCube[side].uv.map((e) => Math.abs(e)),
-        ...finalCube[side].uv_size.map((e) => Math.abs(e)),
+        ...initialCube[side].uv,
+        ...initialCube[side].uv_size,
+        ...finalCube[side].uv,
+        ...finalCube[side].uv_size,
       ];
       console.log(props);
       context.drawImage(imageInput.display, ...props);

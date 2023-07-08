@@ -1,6 +1,6 @@
-import clickster from "/scripts/clickster.js";
-import { loadJson, loadImage } from "/scripts/loaders.js";
-import { CubeManager, Grid } from "/scripts/uvGrid.js";
+import clickster from "./scripts/clickster.js";
+import { loadJson, loadImage } from "./scripts/loaders.js";
+import { CubeManager, Grid } from "./scripts/uvGrid.js";
 
 clickster();
 
@@ -157,44 +157,20 @@ actions.process.addEventListener("click", () => {
   outputs.json.value = JSON.stringify(jsonInput.val);
 
   const context = outputs.image.getContext("2d");
+  context.imageSmoothingEnabled = false;
   for (let i in initialCubes) {
     const initialCube = initialCubes[i].perFace;
     const finalCube = finalCubes[i].perFace;
-    console.log(initialCube);
 
     for (let side in initialCube) {
-      console.log([
-        ...initialCube[side].uv,
-        ...initialCube[side].uv_size,
-        ...finalCube[side].uv,
-        ...finalCube[side].uv_size,
-      ]);
-      context.drawImage(
-        imageInput.display,
-        ...initialCube[side].uv,
-        ...initialCube[side].uv_size,
-        ...finalCube[side].uv,
-        ...finalCube[side].uv_size
-      );
+      const props = [
+        ...initialCube[side].uv.map((e) => Math.ceil(Math.abs(e))),
+        ...initialCube[side].uv_size.map((e) => Math.ceil(Math.abs(e))),
+        ...finalCube[side].uv.map((e) => Math.ceil(Math.abs(e))),
+        ...finalCube[side].uv_size.map((e) => Math.ceil(Math.abs(e))),
+      ];
+      console.log(props);
+      context.drawImage(imageInput.display, ...props);
     }
   }
 });
-
-/**
- * Test
- */
-// const canvas = document.querySelector("#imageOutputDisplay");
-// const context = canvas.getContext("2d");
-// context.beginPath();
-// context.rect(0, 0, 1, 1);
-// context.fill();
-// context.closePath();
-// const copy = canvas.toDataURL();
-// canvas.width = 4;
-// canvas.height = 4;
-// const img = document.createElement("img");
-// img.src = copy;
-
-// img.onload = () => {
-//   context.drawImage(img, 0, 0);
-// };

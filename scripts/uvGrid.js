@@ -29,7 +29,10 @@ class CubeManager {
           south: { uv: [x + s[2] * 2 + s[0], y + s[2]], uv_size: [s[0], s[1]] },
           west: { uv: [x + s[2] + s[0], y + s[2]], uv_size: [s[2], s[1]] },
           up: { uv: [x + s[2], y], uv_size: [s[0], s[2]] },
-          down: { uv: [x + s[2] + s[0], y], uv_size: [s[0], s[2]] },
+          down: {
+            uv: [x + s[2] + s[0], y - Math.min(0, s[2])],
+            uv_size: [s[0], Math.abs(s[2])],
+          },
         };
       default:
         return null;
